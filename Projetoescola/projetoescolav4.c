@@ -1,4 +1,4 @@
-//Projeto-escola minha versão III
+//Projeto-escola minha versão IV
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -6,7 +6,7 @@
 #define TAMPROF 2
 #define TAMDIS 2
 int main() { 
-  int opcao, i, opcaoaluno;
+  int opcao, i, opcaoaluno, dataerrada=1;
   
   struct data {
     int dia, mes, ano;
@@ -45,7 +45,6 @@ int main() {
     printf("Digite 3 para setor das disciplinas:\n");
     printf("Digite 4 para sair:\n");
     scanf("%d", &opcao); fflush(stdin);
-    scanf("%c");
   
     switch(opcao) {
       do {
@@ -62,27 +61,36 @@ int main() {
             case 1: 
             printf("*****Cadastro de alunos*****\n");
               for(i=0;i<TAMALUNO;i++) {
+            printf("Aluno %d:\n", i+1);
                 fflush(stdin);
-                printf("Aluno %d:\n", i+1); 
-                printf("Informe o nome: ");
-                fgets(alunos[i].nome, 50, stdin); 
-                size_t ln = strlen(alunos[i].nome) - 1; 
-                if (alunos[i].nome[ln] == '\n')
-                  alunos[i].nome[ln] = '\0';
-                do {
+                 do {
                 printf("Informe a matricula: ");
                 scanf("%d", &alunos[i].matricula); fflush(stdin);
                 }while(alunos[i].matricula < 0);  //teste de matrícula
-
+                getchar();
+                printf("Informe o nome: ");
+                fgets(alunos[i].nome, 50, stdin); 
+                int ln = strlen(alunos[i].nome) - 1; 
+                if (alunos[i].nome[ln] == '\n')
+                  alunos[i].nome[ln] = '\0';
                 do {
                 printf("Informe o sexo: ");
                 scanf("%c", &alunos[i].sexo); fflush(stdin);
                 }while(alunos[i].sexo != 'F' && alunos[i].sexo != 'f' && alunos[i].sexo != 'M' && alunos[i].sexo != 'm');
-                printf("Informe o cpf: ");
+                getchar();
+                do {
+                printf("Informe o cpf corretamente: ");
                 fgets(alunos[i].cpf, 15, stdin);
-                printf("Informe a data de nascimento no formato dd mm aaaa: ");
-                scanf("%d%d%d", &alunos[i].nasc.dia, &alunos[i].nasc.mes, &alunos[i].nasc.ano); fflush(stdin);
-                printf("\n");
+                }while(alunos[i].cpf[3] != '.' && alunos[i].cpf[7] != '.' && alunos[i].cpf[11] !='-');
+
+                do {
+                    dataerrada=0;
+                    printf("Informe a data de nascimento no formato dd mm aaaa: ");
+                    scanf("%d%d%d", &alunos[i].nasc.dia, &alunos[i].nasc.mes, &alunos[i].nasc.ano); fflush(stdin);
+                    printf("\n");
+                    if(alunos[i].nasc.dia > 32 || alunos[i].nasc.mes > 12 || alunos[i].nasc.ano > 2022 || alunos[i].nasc.ano < 1930)
+                    dataerrada++;
+                }while(dataerrada > 0);
               }
             break;
 
@@ -140,9 +148,15 @@ int main() {
               }while(prof[i].sexo != 'F' && prof[i].sexo != 'f' && prof[i].sexo != 'm' && prof[i].sexo != 'M' ); fflush(stdin);
             printf("Informe o cpf: ");
             fgets(prof[i].cpf, 15, stdin);
+            
+            do {
+            dataerrada=0;
             printf("Informe a data de nascimento no formato dd mm aaaa: ");
             scanf("%d%d%d", &prof[i].nasc.dia, &prof[i].nasc.mes, &prof[i].nasc.ano); fflush(stdin);
+            if(prof[i].nasc.dia > 31 || prof[i].nasc.mes > 12 || prof[i].nasc.ano > 2020)
+            dataerrada++;
             printf("\n");
+            }while(dataerrada > 0); 
         }
         break;
         

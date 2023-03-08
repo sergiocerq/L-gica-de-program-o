@@ -45,7 +45,6 @@ int main() {
     printf("Digite 3 para setor das disciplinas:\n");
     printf("Digite 4 para sair:\n");
     scanf("%d", &opcao); fflush(stdin);
-    scanf("%c");
   
     switch(opcao) {
       do {
@@ -59,20 +58,22 @@ int main() {
         scanf("%d", &opcaoaluno);
 
           switch (opcaoaluno) {
+            printf("Aluno %d:\n", i+1);
             case 1: 
             printf("*****Cadastro de alunos*****\n");
               for(i=0;i<TAMALUNO;i++) {
                 fflush(stdin);
+                 do {
+                printf("Informe a matricula: ");
+                scanf("%d", &alunos[i].matricula); fflush(stdin);
+                }while(alunos[i].matricula < 0);  //teste de matrícula
                 printf("Aluno %d:\n", i+1); 
                 printf("Informe o nome: ");
                 fgets(alunos[i].nome, 50, stdin); 
                 size_t ln = strlen(alunos[i].nome) - 1; 
                 if (alunos[i].nome[ln] == '\n')
                   alunos[i].nome[ln] = '\0';
-                do {
-                printf("Informe a matricula: ");
-                scanf("%d", &alunos[i].matricula); fflush(stdin);
-                }while(alunos[i].matricula < 0);  //teste de matrícula
+        
 
                 do {
                 printf("Informe o sexo: ");

@@ -1,11 +1,13 @@
 //Projeto-escola minha versão III
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #define TAMALUNO 2
 #define TAMPROF 2
 #define TAMDIS 2
 int main() { 
   int opcao, i, opcaoaluno;
+  
   struct data {
     int dia, mes, ano;
   }nasc;
@@ -13,9 +15,9 @@ int main() {
   struct fichaluno {
     int matricula;
     char nome[50];
-    char sexo;
+    char sexo; // M ou m -> masculino e F ou f -> feminino
     struct data nasc;
-    char cpf[16];
+    char cpf[15];
   }alunos[TAMALUNO];
   
   struct fichaprof {
@@ -23,7 +25,7 @@ int main() {
     char nome[50];
     char sexo;
     struct data nasc;
-    char cpf[16];
+    char cpf[15];
   }prof[TAMPROF];
 
   struct fichadisc {
@@ -43,6 +45,7 @@ int main() {
     printf("Digite 3 para setor das disciplinas:\n");
     printf("Digite 4 para sair:\n");
     scanf("%d", &opcao); fflush(stdin);
+    scanf("%c");
   
     switch(opcao) {
       do {
@@ -60,9 +63,12 @@ int main() {
             printf("*****Cadastro de alunos*****\n");
               for(i=0;i<TAMALUNO;i++) {
                 fflush(stdin);
-                printf("Aluno %d:\n", i+1);
+                printf("Aluno %d:\n", i+1); 
                 printf("Informe o nome: ");
                 fgets(alunos[i].nome, 50, stdin); 
+                size_t ln = strlen(alunos[i].nome) - 1; 
+                if (alunos[i].nome[ln] == '\n')
+                  alunos[i].nome[ln] = '\0';
                 do {
                 printf("Informe a matricula: ");
                 scanf("%d", &alunos[i].matricula); fflush(stdin);
@@ -119,14 +125,19 @@ int main() {
         
         case 2: 
         printf("*****Menu do Professor*****\n");
-        
+
         for(i=0;i<TAMPROF;i++) {
             printf("Informe o nome: ");
             fgets(prof[i].nome, 50, stdin);
+            do {
             printf("Informe a matricula: ");
             scanf("%d", &prof[i].matricula); fflush(stdin);
+            }while(prof[i].matricula<0); fflush(stdin);
+          
+            do {
             printf("Informe o sexo: ");
             scanf("%c", &prof[i].sexo); fflush(stdin);
+              }while(prof[i].sexo != 'F' && prof[i].sexo != 'f' && prof[i].sexo != 'm' && prof[i].sexo != 'M' ); fflush(stdin);
             printf("Informe o cpf: ");
             fgets(prof[i].cpf, 15, stdin);
             printf("Informe a data de nascimento no formato dd mm aaaa: ");
