@@ -1,4 +1,4 @@
-//fibonacci
+//Sequência de fibonacci
 #include <stdio.h>
 #include <stdlib.h>
 int main() {
@@ -11,5 +11,5 @@ int main() {
 		printf("%d ",z);
 		y=z;
 	}
-return 0;
+  return 0;
 }
