@@ -36,7 +36,7 @@ int opcao;
   do {
     printf("*****MENU DA ESCOLA*****\n");
     printf("Digite 1 para aluno:\n");
-    printf("Digite 2 para professor\;\n");
+    printf("Digite 2 para professor\n;");
     printf("Digite 3 para disciplina:\n");
     printf("Digite 4 para sair:\n");
     scanf("%d", &opcao);

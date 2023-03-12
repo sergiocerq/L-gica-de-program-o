@@ -10,7 +10,7 @@ int main() {
   
   struct data {
     int dia, mes, ano;
-  }nasc;
+  } nasc;
   
   struct fichaluno {
     int matricula;
@@ -18,7 +18,7 @@ int main() {
     char sexo; // M ou m -> masculino e F ou f -> feminino
     struct data nasc;
     char cpf[15];
-  }alunos[TAMALUNO];
+  } alunos[TAMALUNO];
   
   struct fichaprof {
     int matricula;
@@ -26,19 +26,19 @@ int main() {
     char sexo;
     struct data nasc;
     char cpf[15];
-  }prof[TAMPROF];
+  } prof[TAMPROF];
 
   struct fichadisc {
     char nome[50];
     char codigo[15];
     int semestre; //somente numeros
     char professor[30];
-  }disciplinas[TAMDIS];
+  } disciplinas[TAMDIS];
 
   do {
-    if (opcao == 4) {
-        break;
-    }
+    if (opcao == 4) 
+      break;
+    
     printf("*****MENU DA ESCOLA*****\n");
     printf("Digite 1 para setor dos alunos:\n");
     printf("Digite 2 para setor dos professores\n");
