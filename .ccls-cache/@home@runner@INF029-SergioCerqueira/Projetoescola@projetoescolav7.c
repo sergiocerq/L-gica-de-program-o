@@ -45,12 +45,13 @@
   int menualuno(int opcaoaluno);
   int menuprof(int opcaoprof);
   int menudisciplina(int opcaodisc);
+  int menuopcoesdiversas(int opcaodiversa);
 
 //Inicialização da função main
 int main() { 
   setlocale(LC_ALL, "Portuguese"); //função que permite a acentuação em português
-  int opcao, i, j, opcaoaluno, opcaoprof, opcaodisc, opcaolist, dataerrada=1, qtdalunos=0, qtdprof=0, qtddisc=0, ln, cadastro, matricula, alunocadastrado, codigo, achou; //declaração de váriaveis auxiliares
-  char sexo, nome;
+  int opcao, i, j, k, cont=0, opcaoaluno, opcaoprof, opcaodisc, opcaodiversa, dataerrada=1, qtdalunos=0, qtdprof=0, qtddisc=0, ln, cadastro, matricula, alunocadastrado, alunocad, codigo, achou=0, mes; //declaração de váriaveis auxiliares
+  char sexo, letrateste[21];
 
   fichaluno alunos[TAMALUNO],copia1; // declaração da struct alunos
   fichaprof prof[TAMPROF], copia2; // declaração da struct professor
@@ -83,7 +84,7 @@ int main() {
                 ln = strlen(alunos[qtdalunos].nome) - 1; //processo para remoção do '\n' do fgets
                 if (alunos[qtdalunos].nome[ln] == '\n')
                   alunos[qtdalunos].nome[ln] = '\0';
-                do { //cadastro do sexo do aluno (apenas com F ou M)
+                  do { //cadastro do sexo do aluno (apenas com F ou M)
                     printf("Informe o sexo com F ou M: ");
                     scanf("%c", &alunos[qtdalunos].sexo); 
                     getchar();
@@ -99,9 +100,11 @@ int main() {
                 printf("Informe o cpf corretamente: ");//cadastro de cpf do aluno
                 fgets(alunos[qtdalunos].cpf, 15, stdin);
                 ln = strlen(alunos[qtdalunos].cpf) - 1; //remoção do '\n' do fgets
-                if (alunos[qtdalunos].cpf[ln] == '\n')
+                if (alunos[qtdalunos].cpf[ln] == '\n') {
                   alunos[qtdalunos].cpf[ln] = '\0';
-                  setbuf(stdin, 0);
+                }
+                  setbuf(stdin, 0); 
+                  
                   
                   alunos[qtdalunos].ativo = 1;
                   printf("Aluno cadastrado com sucesso!\n");
@@ -114,14 +117,17 @@ int main() {
                           alunos[i - 1] = alunos[i];
                           alunos[i] = copia1;
                         }
+                        else {
+                          continue;
+                        }
                       }
                     }
+                    
                     qtdalunos++;
                     break;
                    }
                        break;
                    }
-                   
                    case 2: {
                        printf("*****Listar alunos*****\n");
                         if (qtdalunos == 0) { //teste para verificar se a matrícula existe
@@ -187,8 +193,9 @@ int main() {
                           printf("Informe o cpf corretamente: ");
                           fgets(alunos[i].cpf, 15, stdin);
                           ln = strlen(alunos[i].cpf) - 1; 
-                          if (alunos[i].cpf[ln] == '\n')
+                          if (alunos[i].cpf[ln] == '\n') {
                             alunos[i].cpf[ln] = '\0';
+                          }
                             alunos[i].ativo = 1;
                             qtdalunos++; //verificar se o teste vai dar certo
                             printf("Aluno atualizado com sucesso!\n");
@@ -202,9 +209,13 @@ int main() {
                                 alunos[i - 1] = alunos[i];
                                 alunos[i] = copia1;
                           }
+                          else {
+                            continue;
+                          }
                         }
                       }
                             printf("\n");
+                          break;
                           } 
                         }
                         if(achou == 0) {
@@ -360,6 +371,9 @@ int main() {
                           prof[i - 1] = prof[i];
                           prof[i] = copia2;
                         }
+                        else {
+                          continue;
+                        }
                       }
                     }
                     ++qtdprof;
@@ -431,8 +445,10 @@ int main() {
                         printf("Informe o cpf corretamente: ");
                         fgets(prof[i].cpf, 15, stdin);
                         ln = strlen(prof[i].cpf) - 1; 
-                        if (prof[i].cpf[ln] == '\n')
+                        if (prof[i].cpf[ln] == '\n') {
                           prof[i].cpf[ln] = '\0';
+                        }
+
                           prof[i].ativo = 1;
                           qtdprof++;
                         
@@ -443,6 +459,9 @@ int main() {
                             if(strcmp(copia2.nome, prof[i].nome) > 0) {
                               prof[i - 1] = prof[i];
                               prof[i] = copia2;
+                            }
+                            else {
+                              continue;
                             }
                           }
                         }
@@ -581,7 +600,6 @@ int main() {
                     if (disciplinas[qtddisc].professor[ln] == '\n')
                       disciplinas[qtddisc].professor[ln] = '\0';
                     
-
                     printf("Informe o semestre somente com numeros: "); //semestre somente com numeros
                     scanf("%d", &disciplinas[qtddisc].semestre);
                     getchar();
@@ -592,13 +610,13 @@ int main() {
                     if (disciplinas[qtddisc].nome[ln] == '\n')
                       disciplinas[qtddisc].nome[ln] = '\0';
                     printf("\n");
+                    disciplinas[qtddisc].alunocad=0;
                     qtddisc++;
                     setbuf(stdin, 0);
                     break;
                     }
                   }
-                       break;
-                   
+                  //break;
                    case 2: {//atualização de disciplinas
                    if(qtddisc == 0) {
                        printf("Nao existe nenhum cadasatro de disciplinas!\n");
@@ -621,8 +639,9 @@ int main() {
                     printf("Informe o nome da disciplina: ");
                     fgets(disciplinas[i].nome, 49, stdin); 
                     ln = strlen(disciplinas[i].nome) - 1; 
-                    if (disciplinas[i].nome[ln] == '\n')
+                    if (disciplinas[i].nome[ln] == '\n') {
                       disciplinas[i].nome[ln] = '\0';
+                    }
                       setbuf(stdin, 0);
                     do {
                         printf("Informe o semestre apenas com numeros: ");
@@ -648,8 +667,9 @@ int main() {
                        printf("Não existe nenhum cadastro de disciplinas!\n");
                        }
                     else {
+                      printf("Listagem das disciplinas sem os dados dos alunos\n\n");
                         for(i=0;i<qtddisc;i++) { //listagem das disciplinas
-                            getchar();
+                            setbuf(stdin, 0);
                             printf("Disciplina %d:\n", i+1);
                             printf("Nome da discipina: %s\n", disciplinas[i].nome);
                             printf("Codigo: %d\n", disciplinas[i].codigo); 
@@ -663,41 +683,12 @@ int main() {
                 break;
  
                    case 4: {
-                        setbuf(stdin, 0);
-                       ("Listagem de dados dos alunos\n");
-                       if(qtddisc == 0 || qtdalunos == 0) {
-                      printf("Não existe nenhum cadastro de disciplinas ou alunos!\n");
-                      break;
-                       }
-                       if(alunocadastrado == 0) {
-                        printf("Nao existe nenhum aluno cadastrado em uma disciplina!\n");
-                        break;
-                       }
-                       setbuf(stdin, 0);
-                        printf("Nome da discipina: %s\n", disciplinas[i].nome);
-                        printf("Codigo: %d\n", disciplinas[i].codigo); 
-                        printf("Nome do professor: %s\n", disciplinas[i].professor); 
-                        printf("Semestre: %d\n", disciplinas[i].semestre);
-                        printf("\n");
-                        for(i=0;i<alunocadastrado;++i) { //listagem dos alunos cadastrados sem ordem
-                            if(disciplinas[i].alunocad == 1) {
-                            setbuf(stdin, 0);
-                            printf("Nome do aluno: %s\n", disciplinas[i].alunodisc[i].nome);
-                            printf("Matricula do aluno: %d\n", disciplinas[i].alunodisc[i].matricula); 
-                            printf("Sexo do aluno: %c\n", disciplinas[i].alunodisc[i].sexo);
-                            printf("CPF do aluno: %s\n",disciplinas[i].alunodisc[i].cpf);
-                            printf("Data de nascimento do aluno: %d/%d/%d\n", disciplinas[i].alunodisc[i].nasc.dia, disciplinas[i].alunodisc[i].nasc.mes, disciplinas[i].alunodisc[i].nasc.ano);
-                            printf("\n");
-                            }
-                          }
-                        break;
-                   }
-
-                   case 5: {
                       if(qtddisc == 0 || qtdalunos == 0) {
                         printf("Nao existe nenhum aluno matriculado em uma disciplina!\n");
                         break;
                         }
+                      else {
+                        
                         printf("Cadastro de alunos em uma disciplina\n");
                         achou=0;
                         printf("Informe a matricula do aluno a ser adicionada: ");
@@ -715,20 +706,80 @@ int main() {
                             achou++;
                         }
                         --i;
+                        alunocad = disciplinas[i].alunocad;
                         if(achou > 1) {
-                          disciplinas[i].alunodisc[i] = alunos[ln];
-                          disciplinas[i].alunocad = 1;
+                          disciplinas[i].alunodisc[alunocad] = alunos[ln];
+                          disciplinas[i].alunocad+=1;
                           ++alunocadastrado;
                           printf("Aluno cadastrado com sucesso!\n");
-                          break;
+                          alunocad++;
                         }
                         else {
                           printf("Aluno nao encontrado!\n");
                         break;
                         }
+                        break;
+                      }
+                      
                       }
 
+                      case 5: {
+                        setbuf(stdin, 0);
+                       ("Listagem de dados dos alunos\n");
+                       if(qtddisc == 0 || qtdalunos == 0) {
+                      printf("Não existe nenhum cadastro de disciplinas ou alunos!\n");
+                      break;
+                       }
+                       if(alunocadastrado == 0) {
+                        printf("Nao existe nenhum aluno cadastrado em uma disciplina!\n");
+                        break;
+                       }
+                       else {
+                        setbuf(stdin, 0);
+                        printf("Nome da discipina: %s\n", disciplinas[i].nome);
+                        printf("Codigo: %d\n", disciplinas[i].codigo); 
+                        printf("Nome do professor: %s\n", disciplinas[i].professor); 
+                        printf("Semestre: %d\n", disciplinas[i].semestre);
+                        printf("\n");
+
+                        for(i=0;i<qtddisc;++i) { //listagem dos alunos cadastrados sem ordem
+                            if(disciplinas[i].alunocad > 0) {
+                              for(j=0;j<disciplinas[i].alunocad;++j) {
+                                setbuf(stdin, 0);
+                                printf("Nome do aluno: %s\n", disciplinas[i].alunodisc[j].nome);
+                                printf("Matricula do aluno: %d\n", disciplinas[i].alunodisc[j].matricula); 
+                                printf("Sexo do aluno: %c\n", disciplinas[i].alunodisc[j].sexo);
+                                printf("CPF do aluno: %s\n", disciplinas[i].alunodisc[j].cpf);
+                                printf("Data de nascimento do aluno: %d/%d/%d\n", disciplinas[i].alunodisc[j].nasc.dia, disciplinas[i].alunodisc[j].nasc.mes, disciplinas[i].alunodisc[j].nasc.ano);
+                                printf("\n");
+                              }
+                            }
+                          }
+
+                          break;
+                       }
+                       break; 
+                   }
+
                    case 6: {
+                    if(qtddisc == 0) {
+                      printf("Nao existe nenhum cadastro de disciplinas!\n");
+                      break;
+                    }
+                    else {
+                       printf("Disciplinas com mais de 40 alunos:\n");
+                       for(i=0;i<qtddisc;i++) {
+                        if(disciplinas[i].alunocad >= 40) {
+                          printf("Disciplina: %s\n", disciplinas[i].nome);
+                          printf("Professor: %s\n", disciplinas[i].professor);
+                        }
+                       }
+                       break;
+                    }
+                       break;
+                   }
+
+                   case 7: {
                        printf("Saindo do setor de disciplinas...\n");
                        break;
                    }
@@ -739,20 +790,117 @@ int main() {
                    }
                 }
                }
-            } while(opcaodisc != 6);
+               
+            }while(opcaodisc != 7);
           
           break;
           
-          case 4: {
-              printf("Saindo do programa...");
-              break;
-          }  
+          
+            case 4: {
+              do {
+                printf("Opcoes diversas\n");
+                opcaodiversa = menuopcoesdiversas(opcaodiversa);
+                switch (opcaodiversa) {
+                  case 1: {
+                    printf("Aniversariantes do mes:\n");
+                    if(qtdalunos == 0 && qtdprof == 0) {
+                      printf("Nao existe nenhum cadastro de professor e de aluno.\n");
+                      break;
+                    }
+                    else {
+                      printf("Informe o mes que deseja buscar com numeros: ");
+                      scanf("%d", &mes);
+                      if(qtdalunos > 0) {
+                        for(i=0;i<qtdalunos;i++) {
+                          if(mes ==  alunos[i].nasc.mes)
+                            printf("%s - %d/%d/%d\n", alunos[i].nome, alunos[i].nasc.dia, alunos[i].nasc.mes, alunos[i].nasc.ano);
+                        }
+                      }
+                      if(qtdprof > 0) {
+                        for(j=0;j<qtdprof;j++) {
+                          if(mes == prof[j].nasc.mes)
+                            printf("%s - %d/%d/%d\n", prof[j].nome, prof[j].nasc.dia, prof[j].nasc.mes, prof[j].nasc.ano);
+                        }
+                      }
+                    }
+                    break;
+                  }
+                  case 2: {
+                    if(qtdalunos == 0 && qtdprof == 0) {
+                      printf("Nao existe nenhum cadastro de professor e de aluno.\n");
+                      break;
+                    }
+                    else {
+                      setbuf(stdin, 0);
+                      printf("Buscar uma pessoa por letras:\n");
+                      printf("Digite as letras: ");
+                      printf("\n");
+                      setbuf(stdin, 0);
+                      fgets(letrateste, 20, stdin);
+                      setbuf(stdin, 0);
+                      if(qtdalunos > 0) {
+                        for(i=0;i<qtdalunos;i++) { 
+                          cont=0;
+                          for(j=0;j<strlen(alunos[i].nome);j++) {
+                            for(k=0;k<strlen(letrateste);k++) {
+                              setbuf(stdin, 0);
+                              if(letrateste[k] == alunos[i].nome[j]) {
+                                cont++;
+                                break;
+                              }
+                             }
+                            }
+                            if(cont > 2) { 
+                            printf("- %s\n", alunos[i].nome);
+                          }
+                          }
+                        } 
+                        if(qtdprof > 0) {
+                        for(i=0;i<qtdprof;i++) { 
+                          cont=0;
+                          for(j=0;j<strlen(prof[i].nome);j++) {
+                            for(k=0;k<strlen(letrateste);k++) {
+                              setbuf(stdin, 0);
+                              if(letrateste[k] == prof[i].nome[j]) {
+                                cont++;
+                                break;
+                              }
+                             }
+                            }
+                            if(cont > 2) { 
+                            printf("- %s\n", prof[i].nome);
+                            }
+                          }
+                          break;
+                        }
+                        break;
+                      }
+                      break;
+                    }
+                    case 3: {
+                    printf("Saindo do setor de opcoes diversas...\n");
+                    break;
+                  }
+                  default: {
+                    printf("Opcao invalida!\n");
+                    break;
+                  }
+                }
+            } while(opcaodiversa != 3);
+            break;
+          }
+
+          case 5: {
+            break;
+          }
            
           default: {
               printf("Opcao invalida!\n");
+              break;
           }
       }
-  }while (opcao != 4);
+  }while (opcao != 5);
+  printf("Finalizando o codigo...\n");
   return 0;
 }
 
@@ -762,7 +910,8 @@ int menuprincipal(int opcao) {
     printf("Digite 1 para setor dos alunos:\n");
     printf("Digite 2 para setor dos professores\n");
     printf("Digite 3 para setor das disciplinas:\n");
-    printf("Digite 4 para sair do programa:\n");
+    printf("Digite 4 para opcoes diversas:\n");
+    printf("Digite 5 para finalizar o programa:\n");
     scanf("%d", &opcao); 
     return opcao;
 }
@@ -798,9 +947,18 @@ int menudisciplina(int opcaodisc) {
     printf("Digite 1 para cadasatrar uma disciplina nova:\n");
     printf("Digite 2 para atualizar uma disciplina:\n");
     printf("Digite 3 para listar discipinas SEM dados do aluno:\n");
-    printf("Digite 4 para listar discipinas COM dados do aluno\n");
-    printf("Digite 5 para adicionar um aluno a uma disciplina:\n");
-    printf("Digite 6 para sair do menu de disciplinas:\n");
+    printf("Digite 4 para adicionar um aluno a uma disciplina:\n");
+    printf("Digite 5 para listar discipinas COM dados do aluno\n");
+    printf("Digite 6 para listar as disciplinas com mais de 40 alunos:\n");
+    printf("Digite 7 para sair do menu de disciplinas:\n");
     scanf("%d", &opcaodisc);
     return opcaodisc; 
+}
+//função menu opções diversas
+int menuopcoesdiversas(int opcaodiversa) {
+  printf("Digite 1 para ver os aniversariantes do mes:\n");
+  printf("Digite 2 para setor de busca:\n");
+  printf("Digite 3 para sair do setor de opcoes diversas:\n");
+  scanf("%d", &opcaodiversa);
+  return opcaodiversa;
 }
