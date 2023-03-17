@@ -1,6 +1,6 @@
 #include <stdio.h>
 int main() {
-  int n, i, total, soma=0; // declaração de variaveis
+  int n, i, total, soma = 0; // declaração de variaveis
   float media = 0.0;
 
   printf("informe o numero de idades:\n"); // leitura da quantidade n de idades
@@ -13,10 +13,11 @@ int main() {
     scanf("%d", &idades[i]);
     soma += idades[i];
   }
-  media = soma/n; // calculo da media
+  media = soma / n; // calculo da media
   printf("Media: %.2f\n", media);
 
-  for (i = 0; i < n; i++) { // procedimento para ver se a idade e maior que a media
+  for (i = 0; i < n;
+       i++) { // procedimento para ver se a idade e maior que a media
     if (idades[i] > media)
       printf("Idade: %d\n", idades[i]);
   }

@@ -1,8 +1,8 @@
-//Função subtrai
+// Função subtrai
 #include <stdio.h>
 #include <stdlib.h>
 int subtrai();
-int main () {
+int main() {
   int a, b, c, resultado;
   printf("Informe o primeiro valor: ");
   scanf("%d", &a);
@@ -17,6 +17,6 @@ int main () {
 int subtrai(int a, int b, int c) {
   int resultado;
   resultado = a - b;
-  resultado-= c;
+  resultado -= c;
   return resultado;
 }

@@ -1,6 +1,6 @@
 #include <stdio.h>
 int funcaosoma();
-int main () {
+int main() {
   int resultado;
   restultado = funcaosoma();
   return 0;
@@ -13,8 +13,7 @@ int funcaosoma() {
   printf("\nInforme o segundo valor: ");
   scanf("%d", &b);
 
-  resultado = a+b;
+  resultado = a + b;
 
   return resultado;
-  
 }
