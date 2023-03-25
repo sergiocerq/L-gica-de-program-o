@@ -2,9 +2,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#define TAMALUNO 10
-#define TAMPROF 10
-#define TAMDIS 5
+#define TAMALUNO 300
+#define TAMPROF 150
+#define TAMDIS 50
 /*TAMALUNO é o tamanho da struct de aluno
   TAMPROF é o tamanho da struct de professores
   TAMDIS é o tamanho da struct de disciplinas*/
@@ -170,10 +170,10 @@ int main() {
 
         case 3: {
           if (qtdalunos == 0) {
-            printf("Nenhum aluno cadastrado!\n");
+            puts("Nenhum aluno cadastrado!");
             break;
           } else {
-            printf("Atualizar aluno\n");
+            puts("Atualizar aluno");
             printf("Informe a matricula que deseja atualizar: ");
             scanf("%d", &matricula);
             for (i = 0; i < qtdalunos;
@@ -181,12 +181,8 @@ int main() {
               achou = 0;
               if (matricula == alunos[i].matricula && alunos[i].ativo == 1) {
                 achou++;
-                printf("Informe os novos dados:\n");
-                do {
-                  printf("Informe a matricula: ");
-                  scanf("%d", &alunos[i].matricula);
-                } while (alunos[i].matricula < 0); // teste de matrícula
-                getchar();
+                puts("Informe os novos dados:");
+                setbuf(stdin, 0);
                 printf("Informe o nome: ");
                 fgets(alunos[i].nome, 49, stdin);
                 ln = strlen(alunos[i].nome) - 1;
@@ -219,7 +215,7 @@ int main() {
                          alunos[i].cpf[11] != '-');
                 alunos[i].ativo = 1;
                 qtdalunos++;
-                printf("Aluno atualizado com sucesso!\n");
+                puts("Aluno atualizado com sucesso!");
 
                 if (qtdalunos > 0) {
                   // procedimento para ordenar os alunos por ordem alfabetica
@@ -322,7 +318,7 @@ int main() {
           }
           break;
         }
-        case 6: {
+        case 6: { // listar alunos por data de nascimento
           printf("Listar alunos por data de nascimento\n");
 
           break;
@@ -453,12 +449,8 @@ int main() {
               achou = 0;
               if (matricula == prof[i].matricula) {
                 achou++;
-                printf("Informe os novos dados:\n");
-                do {
-                  printf("Informe a matricula: ");
-                  scanf("%d", &prof[i].matricula);
-                } while (prof[i].matricula < 0); // teste de matrícula
-                getchar();
+                puts("Informe os novos dados:");
+                setbuf(stdin, 0);
                 printf("Informe o nome: ");
                 fgets(prof[i].nome, 49, stdin);
                 ln = strlen(prof[i].nome) - 1;
@@ -634,8 +626,7 @@ int main() {
               printf("Cadastro de disciplinas\n");
               printf("Informe o codigo da disciplina: ");
               scanf("%d", &disciplinas[qtddisc].codigo);
-            } while (disciplinas[qtddisc].codigo <
-                     0); // teste de codigo da discipina
+            } while (disciplinas[qtddisc].codigo < 0); // teste de codigo da discipina
             getchar();
 
             printf("Informe o nome do professor: "); // nome do professor
@@ -841,7 +832,7 @@ int main() {
             puts("Nao existe nenhum cadastro de aluno em uma disciplina!");
             break;
           } else {
-            printf("Excluir aluno de uma disciplina\n");
+            puts("Excluir aluno de uma disciplina:");
 
             achou = 0;
             printf("Informe a matricula do aluno a ser excluida: ");
@@ -938,7 +929,7 @@ int main() {
           }
           break;
         }
-        case 2: {
+        case 2: { //
           if (qtdalunos == 0 && qtdprof == 0) {
             printf("Nao existe nenhum cadastro de professor e de aluno.\n");
             break;
@@ -1075,7 +1066,6 @@ int menuopcoesdiversas(int opcaodiversa) {
   scanf("%d", &opcaodiversa);
   return opcaodiversa;
 }
-
 /*passar os dados individualmente da struct na hora do cadastro e tentar
 concertar a listagem de alunos nas disciplinas refazer o algorimto para listar
 os alunos e professores em ordem de data de nascimento trocar os printfs por
