@@ -1,6 +1,7 @@
 { pkgs }: {
 	deps = [
 		pkgs.ls
+  pkgs.ls
   pkgs.gnat
   pkgs.ls
   pkgs.clang_12

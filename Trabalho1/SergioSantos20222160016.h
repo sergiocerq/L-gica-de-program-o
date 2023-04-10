@@ -14,16 +14,37 @@
 //  Nome: Sérgio Cerqueira Santos
 //  email: sergiocerq11@gmail.com
 //  Matrícula: 20222160016
-//  Semestre: 1/2023
+//  Semestre: 2°
 
 //  Copyright © 2016 Renato Novais. All rights reserved.
-// Última atualização: 28/03/2023 - 19/08/2016
+// Última atualização: 03/04/2023
 
 // #################################################
 #ifndef TRABALHO1_SERGIOSANTOS20222160016_H
 #define TRABALHO1_SERGIOSANTOS20222160016_H
-int quebraData(char *data);
-void testeQ1();
+//Declaração das funções
+typedef struct {
+  int dia;
+  int mes;
+  int ano;
+  int retorno;
+} dma;
+//Declaração das funções
+int q1(char *data);
+int q2(char *datainicial, char *datafinal);
+void testeQ1(char *str);
+void testeQ2();
+dma quebraData(char *data);
 int validaData(int dia1,int mes1,int ano1);
+int calculodedata(char *datainicial, char *datafinal);
+void testeQ3();
+int q3(char *string, char letra, int sensitivecase);
+int contacaracter(char *string, char letra, int sensitivecase);
+void testeQ4();
+int q4(char *string, char *palavra, int vet[]);
+void testeQ5();
+int q5(int num);
+void testeQ6();
+int q6(int numerobase, int numerobusca);
 
 #endif TRABALHO1_SERGIOSANTOS20222160016_H
