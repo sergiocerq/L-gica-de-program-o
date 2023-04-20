@@ -34,7 +34,6 @@ int main() {
   printf("\n");
   testeQ6();
   printf("\n");
-  
 }
 void testeQ1(char *str) {
     //testes de datas inválidas/válidas

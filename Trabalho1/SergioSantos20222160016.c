@@ -289,7 +289,7 @@ int q6(int numerobase, int numerobusca) {
                         //ele aumenta incrementa para a próxima casa decimal
                         //evitando assim contagens e repetições desnecessárias
                         if(tamnumbusca > 1) {
-                            i++;
+                            i = posvetnumerobase;
                         }
                         ++qtdocorrencias;
                         break;
