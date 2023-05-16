@@ -1,6 +1,5 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <ctype.h>
 #include "EstruturaVetores.h"
 #define TAM 10
 
@@ -13,18 +12,18 @@ void inicializar () {
 }
 
 void selectionSort (int vetor[], int tamVetor) {
-    int i, j, menorValor, temporario;
-    for (i = 0; i < tamVetor - 1; i++) {
-        menorValor = i;
-        for (j = i + 1; j < tamVetor; j++) {
-            if (vetor[j] < vetor[menorValor]) {
-                menorValor = j;
-            }
-        }
-        temporario = vetor[menorValor];
-        vetor[menorValor] = vetor[i];
-        vetor[i] = temporario;
+  int i, j, menorValor, temporario;
+  for (i = 0; i < tamVetor - 1; i++) {
+    menorValor = i;
+    for (j = i + 1; j < tamVetor; j++) {
+      if (vetor[j] < vetor[menorValor]) {
+        menorValor = j;
+      }
     }
+    temporario = vetor[menorValor];
+    vetor[menorValor] = vetor[i];
+    vetor[i] = temporario;
+  }
 }
 
 int criarEstruturaAux (int posicao, int tamanho) {
@@ -119,10 +118,10 @@ int excluirNumeroEspecificoDeEstrutura (int posicao, int numero) {
 }
 
 int posicaoValida(int posicao) {
-    if(posicao < 10 && posicao >= 0)
-      return SUCESSO;
-    else 
-      return POSICAO_INVALIDA;
+  if(posicao < 10 && posicao >= 0)
+    return SUCESSO;
+  else 
+    return POSICAO_INVALIDA;
 }
 
 int getDadosEstruturaAuxiliar (int posicao, int *vetor) {
@@ -225,17 +224,17 @@ int getDadosOrdenadosDeTodasEstruturasAuxiliares (int vetor[]) {
 }
 
 void insertionsort (int *vet) {
-    int i, j, key;
-    int tamanho = (sizeof(*vet)/sizeof(int));
-    for(i=0;i<tamanho;i++) {
-        j=i+1;
-        key = vet[j];
-        while(j > 0 && vet[j-1] > key) {
-            vet[j] = vet[j-1];
-            j--;
-        }
-        vet[j] = key;
+  int i, j, key;
+  int tamanho = (sizeof(*vet)/sizeof(int));
+  for(i=0;i<tamanho;i++) {
+    j=i+1;
+    key = vet[j];
+    while(j > 0 && vet[j-1] > key) {
+      vet[j] = vet[j-1];
+      j--;
     }
+    vet[j] = key;
+  }
 }
 
 int modificarTamanhoEstruturaAuxiliar (int posicao, int novotamanho) {
@@ -286,11 +285,11 @@ int getQuantidadeElementosEstruturaAuxiliar (int posicao) {
 
 No *montarListaEncadeadaComCabecote() {
   int qtdElementos = 0;
-  No *head = NULL; // meu head inicia como NULL
+  No *head = NULL; 
   for(int i = 0; i<TAM ;i++) {
       qtdElementos+=vetorPrincipal[i].qtdElementos;
   } 
-  if(qtdElementos != 0){ // caso qtdElementos != 0 mudar o valor de head, se não ele retorna head como NULL
+  if(qtdElementos != 0){
     int *vetor2 = (int *) malloc(qtdElementos * sizeof(int));
     if(vetor2 == NULL){
       return NULL;
