@@ -28,13 +28,13 @@ void testeInserirSemNada() {
 
 void testeCriarEstrutura() {
   puts("Teste criar estrutura");
-  printf("%d\n", criarEstruturaAux(-2, 5) == POSICAO_INVALIDA);
-  printf("%d\n", criarEstruturaAux(0, 5) == POSICAO_INVALIDA);
-  printf("%d\n", criarEstruturaAux(11, 5) == POSICAO_INVALIDA);
-  printf("%d\n", criarEstruturaAux(2, -5) == TAMANHO_INVALIDO);
-  printf("%d\n", criarEstruturaAux(2, 0) == TAMANHO_INVALIDO);
-  printf("%d\n", criarEstruturaAux(2, 3) == SUCESSO);
-  printf("%d\n", criarEstruturaAux(2, 6) == JA_TEM_ESTRUTURA_AUXILIAR);
+  printf("%d\n", criarEstruturaAuxiliar(-2, 5) == POSICAO_INVALIDA);
+  printf("%d\n", criarEstruturaAuxiliar(0, 5) == POSICAO_INVALIDA);
+  printf("%d\n", criarEstruturaAuxiliar(11, 5) == POSICAO_INVALIDA);
+  printf("%d\n", criarEstruturaAuxiliar(2, -5) == TAMANHO_INVALIDO);
+  printf("%d\n", criarEstruturaAuxiliar(2, 0) == TAMANHO_INVALIDO);
+  printf("%d\n", criarEstruturaAuxiliar(2, 3) == SUCESSO);
+  printf("%d\n", criarEstruturaAuxiliar(2, 6) == JA_TEM_ESTRUTURA_AUXILIAR);
 }
 
 void testeInserirComEstrutura() {
@@ -57,7 +57,7 @@ void testeExcluir() {
 
 void testeExcluirNumeroEspecifico() {
     puts("Teste excluir numero especifico");
-    printf("%d\n", criarEstruturaAux(9, 3) == SUCESSO);
+    printf("%d\n", criarEstruturaAuxiliar(9, 3) == SUCESSO);
     printf("%d\n", inserirNumeroEmEstrutura(9, 7) == SUCESSO);
     printf("%d\n", inserirNumeroEmEstrutura(9, 4) == SUCESSO);
     printf("%d\n", excluirNumeroEspecificoDeEstrutura(9, 12) == NUMERO_INEXISTENTE);
@@ -106,7 +106,7 @@ void testeRetornarTodosNumeros() {
     printf("%d\n", inserirNumeroEmEstrutura(2, 8) == SUCESSO);
     printf("%d\n", inserirNumeroEmEstrutura(2, 0) == SUCESSO);
 
-    printf("%d\n", criarEstruturaAux(5, 10) == SUCESSO);
+    printf("%d\n", criarEstruturaAuxiliar(5, 10) == SUCESSO);
     printf("%d\n", inserirNumeroEmEstrutura(5, 1) == SUCESSO);
     printf("%d\n", inserirNumeroEmEstrutura(5, 34) == SUCESSO);
     printf("%d\n", inserirNumeroEmEstrutura(5, 12) == SUCESSO);

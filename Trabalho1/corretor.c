@@ -18,107 +18,266 @@
 #include <string.h>
 #include <ctype.h>
 #include "SergioSantos20222160016.h"
-int main() {
-  //O main só faz chamar as funções-testes
-  //e printar '\n' para facilitar a visualização
-  char data[11];
-  testeQ1(data);
-  printf("\n");
-  testeQ2();
-  printf("\n");
-  testeQ3();
-  printf("\n");
-  testeQ4();
-  printf("\n");
-  testeQ5();
-  printf("\n");
-  testeQ6();
-  printf("\n");
+
+void testQ1();
+void testQ2();
+void testQ3();
+void testQ4();
+void testQ5();
+void testQ6();
+
+int main(){
+    //pridntf("q1\n");
+    testQ1(); // 10 testes
+    //pridntf("q2\n");
+    testQ2(); // 35 testes
+    //prindtf("q3\n");
+    testQ3(); // 13 testes
+    //prdintf("q4\n");
+    testQ4(); // 22 testes
+    //prdintf("q5\n");
+    testQ5(); // 10 testes
+    //prdintf("q6\n");
+    testQ6(); // 10 testes 
+    
+    
 }
-void testeQ1(char *str) {
-    //testes de datas inválidas/válidas
-    //Possui 10 testes
-    strcpy(str, "K/02/2015");
-    printf("%d\n", q1(str) == 0);
-    strcpy(str, "4/4/2014");
-    printf("%d\n", q1(str) == 1);
-    strcpy(str, "5/9/2020");
-    printf("%d\n", q1(str) == 1);
-    strcpy(str, "33/9/2020");
-    printf("%d\n", q1(str) == 0);
-    strcpy(str, "5/19/2020");
-    printf("%d\n", q1(str) == 0);
-    strcpy(str, "31/4/2012");
-    printf("%d\n", q1(str) == 0);
-    strcpy(str, "-5/7/2019");
-    printf("%d\n", q1(str) == 0);
-    strcpy(str, "29/2/2001");
-    printf("%d\n", q1(str) == 0);
-    strcpy(str, "29/2/76");
-    printf("%d\n", q1(str) == 0);
-    strcpy(str, "29/2/2008");
-    printf("%d\n", q1(str) == 1);
+
+void testQ1(){
+    char str[11];
+    strcpy(str,"29/02/2015");
+    printf("%d\n",q1(str) == 0);
+    strcpy(str,"29/02/2012");
+    printf("%d\n",q1(str) == 1);
+    strcpy(str,"9/13/2014");
+    printf("%d\n",q1(str) == 0);
+    strcpy(str,"45/4/2014");
+    printf("%d\n",q1(str) == 0);
+    strcpy(str,"12/1/15");
+    printf("%d\n",q1(str) == 1);
+    strcpy(str,"1/9/2016");
+    printf("%d\n",q1(str) == 1);
+    strcpy(str,"//2016");
+    printf("%d\n",q1(str) == 0);
+    strcpy(str,"1//20");
+    printf("%d\n",q1(str) == 0);
+    strcpy(str,"1/R/2016");
+    printf("%d\n",q1(str) == 0);
+    strcpy(str,"1/12/19");
+    printf("%d\n",q1(str) == 1); 
+
 }
-void testeQ2() {
-    //testes de possíveis datas
+
+void testQ2(){
     char datainicial[11], datafinal[11];
-    strcpy(datainicial, "35/2/2008");
-    strcpy(datafinal, "9/2/2008");
-    printf("%d\n", q2(datainicial, datafinal) == 2);
-    strcpy(datainicial, "15/2/2008");
-    strcpy(datafinal, "9/45/2008");
-    printf("%d\n", q2(datainicial, datafinal) == 3);
-    strcpy(datainicial, "15/8/2015");
-    strcpy(datafinal, "9/8/2015");
-    printf("%d\n", q2(datainicial, datafinal) == 4);
-    strcpy(datainicial, "8/4/2004");
-    strcpy(datafinal, "23/11/2019");
-    printf("%d\n", q2(datainicial, datafinal) == 1);
+    int qtdDias, qtdMeses, qtdAnos;
+    DiasMesesAnos dma;
+    int retorno;
+
+    //teste 1
+    qtdDias = -1;
+    qtdMeses = -1;
+    qtdAnos = -1;
+
+    strcpy(datainicial, "01/06/2015");
+    strcpy(datafinal, "01/06/2016");
+    dma = q2(datainicial, datafinal);
+    printf("%d\n", dma.retorno == 1);
+    printf("%d\n", dma.qtdDias == 0);
+    printf("%d\n", dma.qtdMeses == 0);
+    printf("%d\n", dma.qtdAnos == 1);
+
+    //teste 2 - retornos
+    qtdDias = -1;
+    qtdMeses = -1;
+    qtdAnos = -1;
+
+    strcpy(datainicial,"01/30/2015");
+    strcpy(datafinal,"01/06/2016");
+    dma = q2(datainicial, datafinal);
+    printf("%d\n",dma.retorno == 2);
+
+    strcpy(datainicial,"01/3/2015");
+    strcpy(datafinal,"40/06/2016");
+    dma = q2(datainicial, datafinal);
+    printf("%d\n",dma.retorno == 3);
+
+    strcpy(datainicial,"01/06/2016");
+    strcpy(datafinal,"01/06/2015");
+    dma = q2(datainicial, datafinal);
+    printf("%d\n",dma.retorno == 4);
+
+    //teste 3
+    qtdDias = -1;
+    qtdMeses = -1;
+    qtdAnos = -1;
+
+    strcpy(datainicial,"06/06/2017");
+    strcpy(datafinal,"07/07/2017");
+    dma = q2(datainicial, datafinal);
+    printf("%d\n",dma.retorno == 1);
+    printf("%d\n",dma.qtdDias == 1);
+    printf("%d\n",dma.qtdMeses == 1);
+    printf("%d\n",dma.qtdAnos == 0);
+
+    //teste 4
+    qtdDias = -1;
+    qtdMeses = -1;
+    qtdAnos = -1;
+
+    strcpy(datainicial,"06/06/2017");
+    strcpy(datafinal,"05/07/2018");
+    dma = q2(datainicial, datafinal);
+    printf("%d\n",dma.retorno == 1);
+    printf("%d\n",dma.qtdDias == 29);
+    printf("%d\n",dma.qtdMeses == 0);
+    printf("%d\n",dma.qtdAnos == 1);
+
+    //teste 5
+    qtdDias = -1;
+    qtdMeses = -1;
+    qtdAnos = -1;
+
+    strcpy(datainicial,"26/07/2017");
+    strcpy(datafinal,"25/08/2017");
+    dma = q2(datainicial, datafinal);
+    printf("%d\n",dma.retorno == 1);
+    printf("%d\n",dma.qtdDias == 30);
+    printf("%d\n",dma.qtdMeses == 0);
+    printf("%d\n",dma.qtdAnos == 0);
+
+    //teste 6
+    qtdDias = -1;
+    qtdMeses = -1;
+    qtdAnos = -1;
+
+    strcpy(datainicial,"26/06/2017");
+    strcpy(datafinal,"26/07/2017");
+    dma = q2(datainicial, datafinal);
+    printf("%d\n",dma.retorno == 1);
+    printf("%d\n",dma.qtdDias == 0);
+    printf("%d\n",dma.qtdMeses == 1);
+    printf("%d\n",dma.qtdAnos == 0);
+
+    //teste 8
+    qtdDias = -1;
+    qtdMeses = -1;
+    qtdAnos = -1;
+
+    strcpy(datainicial,"27/02/2016");
+    strcpy(datafinal,"03/03/2017");
+    dma = q2(datainicial, datafinal);
+    printf("%d\n",dma.retorno == 1);
+    printf("%d\n",dma.qtdDias == 4);
+    printf("%d\n",dma.qtdMeses == 0);
+    printf("%d\n",dma.qtdAnos == 1);
+
+    //teste 9
+    qtdDias = -1;
+    qtdMeses = -1;
+    qtdAnos = -1;
+
+    strcpy(datainicial,"27/02/2015");
+    strcpy(datafinal,"03/03/2016");
+    dma = q2(datainicial, datafinal);
+    printf("%d\n",dma.retorno == 1);
+    printf("%d\n",dma.qtdDias == 5);
+    printf("%d\n",dma.qtdMeses == 0);
+    printf("%d\n",dma.qtdAnos == 1);
+
+    //teste 10
+    qtdDias = -1;
+    qtdMeses = -1;
+    qtdAnos = -1;
+
+    strcpy(datainicial,"28/01/2016");
+    strcpy(datafinal,"29/02/2016");
+    dma = q2(datainicial, datafinal);
+    printf("%d\n",dma.retorno == 1);
+    printf("%d\n",dma.qtdDias == 1);
+    printf("%d\n",dma.qtdMeses == 1);
+    printf("%d\n",dma.qtdAnos == 0);
+
 }
-void testeQ3() {
-    char string[251];
-    //Teste I
-    strcpy(string, "FLaMENgo é cAMPEão da LiBeRtaDORes!");
-    printf("%d\n",q3(string, 'ã', 0) == 1);
-    printf("%d\n",q3(string, 'é', 1) == 1);
-    printf("%d\n",q3(string, 'o', 0) == 3);
-    printf("%d\n",q3(string, 'E', 1) == 2);
-    printf("%d\n",q3(string, 'F', 1) == 1);
-    printf("\n");
-    //Teste II
-    strcpy(string,"Letícia, signifiCa fEliCIdADE");
-    printf("%d\n",q3(string, 'c', 0) == 3);
-    printf("%d\n",q3(string, 'C', 0) == 3);
-    printf("%d\n",q3(string, 'c', 1) == 1);
-    printf("%d\n",q3(string, 'C', 1) == 2);
-    printf("%d\n",q3(string, 'R', 0) == 0);
-    printf("%d\n",q3(string, 'e', 0) == 3);
-    printf("%d\n",q3(string, 'E', 1) == 2);
-    printf("%d\n",q3(string, 'S', 1) == 0);
+
+void testQ3(){
+    char str[250];
+    strcpy(str,"Renato Lima Novais");
+    printf("%d\n",q3(str, 'a', 0) == 3);
+    printf("%d\n",q3(str, 'b', 0) == 0);
+    printf("%d\n",q3(str, 'l', 1) == 0);
+    printf("%d\n",q3(str, 'l', 0) == 1);
+    printf("%d\n",q3(str, 'L', 0) == 1);
+
+    strcpy(str,"Letícia, signifiCa fEliCIdADE");
+    printf("%d\n",q3(str, 'c', 0) == 3);
+    printf("%d\n",q3(str, 'C', 0) == 3);
+    printf("%d\n",q3(str, 'c', 1) == 1);
+    printf("%d\n",q3(str, 'C', 1) == 2);
+    printf("%d\n",q3(str, 'R', 0) == 0);
+    printf("%d\n",q3(str, 'e', 0) == 3);
+    printf("%d\n",q3(str, 'E', 1) == 2);
+    printf("%d\n",q3(str, 'S', 1) == 0);
+
+    
 }
-void testeQ4() {
-    char string[250], palavra[20];
-    int posicao[50], i;
-    //inicialização do vetor de posicoes
-    for(i=0;i<50;i++) {
-        posicao[i] = -1;
+
+void testQ4(){
+    char strTexto[250];
+    char strBusca[50];
+    int posicoes[30];
+    int i;
+    for (i = 0; i<30; i++){
+        posicoes[i] = -1;
     }
-    //Tteste I
-    strcpy(string,"Programar é legal?");
-    strcpy(palavra,"sim");
-    printf("%d\n",q4(string, palavra, posicao) == 0);
-    printf("\n");
-    //Teste II
-    strcpy(string, "welcome to freecodecamp");
-    strcpy(palavra, "co");
-    printf("%d\n", q4(string, palavra, posicao)== 2);
-    printf("%d\n",posicao[0]==4);
-    printf("%d\n",posicao[1]==5);
-    printf("%d\n",posicao[2]==16);
-    printf("%d\n",posicao[3]==17);
+    strcpy(strTexto,"Laboratorio de programacao: para ratos de programação");
+    strcpy(strBusca,"rato");
+    printf("%d\n",q4(strTexto, strBusca, posicoes) == 2);
+    printf("%d\n",posicoes[0]==5);
+    printf("%d\n",posicoes[1]==8);
+    printf("%d\n",posicoes[2]==34);
+    printf("%d\n",posicoes[3]==37);
+
+
+    for (i = 0; i<30; i++){
+        posicoes[i] = -1;
+    }
+    strcpy(strTexto,"Ola, o mundo e muito grande. Tem muitas pessoas, e muitos problemas");
+    strcpy(strBusca,"mui");
+    printf("%d\n",q4(strTexto, strBusca, posicoes) == 3);
+    printf("%d\n",posicoes[0]==16);
+    printf("%d\n",posicoes[1]==18);
+    printf("%d\n",posicoes[2]==34);
+    printf("%d\n",posicoes[3]==36);
+    printf("%d\n",posicoes[4]==52);
+    printf("%d\n",posicoes[5]==54);
+
+    for (i = 0; i<30; i++){
+        posicoes[i] = -1;
+    }
+    strcpy(strTexto,"Programar é legal?");
+    strcpy(strBusca,"sim");
+    printf("%d\n",q4(strTexto, strBusca, posicoes) == 0);
+
+    for (i = 0; i<30; i++){
+        posicoes[i] = -1;
+    }
+    strcpy(strTexto,"maraaaavilha, meu prograaaama funcionou");
+    strcpy(strBusca,"aa");
+    printf("%d\n",q4(strTexto, strBusca, posicoes) == 4);
+    printf("%d\n",posicoes[0]==4);
+    printf("%d\n",posicoes[1]==5);
+    printf("%d\n",posicoes[2]==6);
+    printf("%d\n",posicoes[3]==7);
+    printf("%d\n",posicoes[4]==24);
+    printf("%d\n",posicoes[5]==25);
+    printf("%d\n",posicoes[6]==26);
+    printf("%d\n",posicoes[7]==27);
+
 }
-void testeQ5() {
-    //Possui 10 testes
+
+
+void testQ5(){
     printf("%d\n",q5(345) == 543);
     printf("%d\n",q5(78) == 87);
     printf("%d\n",q5(3) == 3);
@@ -130,7 +289,8 @@ void testeQ5() {
     printf("%d\n",q5(8) == 8);
     printf("%d\n",q5(1234) == 4321);
 }
-void testeQ6() {
+
+void testQ6(){
     printf("%d\n",q6(34567368, 3) == 2);
     printf("%d\n",q6(34567368, 4576) == 0);
     printf("%d\n",q6(3539343, 3) == 4);
@@ -141,5 +301,5 @@ void testeQ6() {
     printf("%d\n",q6(1234, 13) == 0);
     printf("%d\n",q6(544444, 4) == 5);
     printf("%d\n",q6(1234562354, 32) == 0);
-    printf("%d\n",q6(7777777, 7) == 7);
+
 }

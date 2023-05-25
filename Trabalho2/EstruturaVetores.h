@@ -38,7 +38,7 @@ void inicializar();
 void finalizar();
 void selectionSort(int vetor[], int tamVetor);
 void insertionsort(int *vet);
-int criarEstruturaAux(int posicao, int tamanho);
+int criarEstruturaAuxiliar(int posicao, int tamanho);
 int inserirNumeroEmEstrutura(int posicao, int valor);
 int excluirNumeroDoFinaldaEstrutura(int posicao);
 int excluirNumeroEspecificoDeEstrutura(int posicao, int numero);

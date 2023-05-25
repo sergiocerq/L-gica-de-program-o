@@ -26,7 +26,7 @@ void selectionSort (int vetor[], int tamVetor) {
   }
 }
 
-int criarEstruturaAux (int posicao, int tamanho) {
+int criarEstruturaAuxiliar (int posicao, int tamanho) {
   --posicao;
   int retorno;
   if(posicao < 0 || posicao > 9) {
@@ -322,8 +322,7 @@ void getDadosListaEncadeadaComCabecote(No *head, int *vet) {
 }
 
 void destruirListaEncadeadaComCabecote(No *head) {
-  No *nextToRelease = head;
-  No *getFree = NULL;   
+  No *nextToRelease = head, *getFree;   
   while(nextToRelease->next != NULL) {
     getFree = nextToRelease;
     free(getFree);
